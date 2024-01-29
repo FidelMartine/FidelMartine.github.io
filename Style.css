@@ -18,7 +18,7 @@ input {
 }
 
 input[type="submit"] {
-  background-color: #000;
+  background-color: #CEFF33;
   color: #fff;
   cursor: pointer;
 }
