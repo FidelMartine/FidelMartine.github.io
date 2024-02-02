@@ -1,6 +1,6 @@
 function buscarPersonaje() {
   var nombre = document.getElementById("personaje").value;
-  var url = "https://rickandmortyapi.com/api/character/?name=" + nombre;
+  var url = "https://rickandmortyapi.com/api/character/;
 
   // Petición a la API
   fetch(url)
