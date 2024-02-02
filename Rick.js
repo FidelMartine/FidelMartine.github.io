@@ -1,11 +1,3 @@
-// Función para buscar al dar clic en Enter
-document.getElementById("personaje").addEventListener("keydown", function(event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    buscarPersonaje();
-  }
-});
-
 function buscarPersonaje() {
   var nombre = document.getElementById("personaje").value;
   var url = "https://rickandmortyapi.com/api/character/?name=" + nombre;
@@ -17,9 +9,29 @@ function buscarPersonaje() {
     })
     .then(function(data) {
       mostrarResultado(data);
-    })
-    .catch(function(error) {
-      console.log(error);
-      mostrarError(error);
     });
+}
+
+function mostrarResultado(data) {
+  var resultado = document.getElementById("resultado");
+  resultado.innerHTML = "";
+
+  // Mostrar la información del personaje
+  if (data.results.length > 0) {
+    var personaje = data.results[0];
+    resultado.innerHTML = `
+      <img src="${personaje.image}" alt="${personaje.name}">
+      <h2>${personaje.name}</h2>
+      <p>Especie: ${personaje.species}</p>
+      <p>Estatus: ${personaje.status}</p>
+      <p>Origen: ${personaje.origin.name}</p>
+    `;
+  } else {
+    resultado.innerHTML = "No se encontró el personaje";
+  }
+}
+
+function limpiar() {
+  document.getElementById("personaje").value = "";
+  document.getElementById("resultado").innerHTML = "";
 }
