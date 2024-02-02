@@ -1,43 +1,65 @@
-function buscarPersonaje() {
-  var nombre = document.getElementById("personaje").value;
-  var url = 'https://rickandmortyapi.com/api/character/';
+const charactersEl = document.getElementById('characters');
+const nameFilterEl = document.getElementById('name-filter');
+const statusFilterEl = document.getElementById('status-filter');
 
-  // Petición a la API
-  fetch(url)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      mostrarResultado(data);
-    });
+// tenemos que crear la funcion que haga el llamado a la api
+
+async function getCharacters (name, status){
+
+    let url = 'https://rickandmortyapi.com/api/character/';
+
+    if (name || status){
+        url += '?';
+        if(name){
+            url += `name=${name}&`;
+        }
+
+        if(status){
+            url += `status=${status}`;
+        }
+    }
+
+
+    const response = await fetch(url);
+    const data = await response.json(); 
+
+    return data.results;
+
 }
 
-function mostrarResultado(data) {
-  var resultado = document.getElementById("resultado");
-  resultado.innerHTML = "";
+// la funcion que va a renderizar los elementos dentro del DOM
 
-  // Mostrar la información del personaje
-  if (data.results.length > 0) {
-    var personaje = data.results[0];
-    resultado.innerHTML = `
-      <img src="${personaje.image}" alt="${personaje.name}">
-      <h2>${personaje.name}</h2>
-      <p>Especie: ${personaje.species}</p>
-      <p>Estatus: ${personaje.status}</p>
-      <p>Origen: ${personaje.origin.name}</p>
-      <button onclick="agregarPersonaje(${personaje.id})">Agregar</button>
-    `;
-  } else {
-    resultado.innerHTML = "No se encontró el personaje";
-  }
+async function displayCharacters (name, status) {
+    
+    // Obtener los personajes filtrados
+    const characters = await getCharacters(name, status);
+    
+    charactersEl.innerHTML = '';
+
+    // renderizar los personajes
+    for( let character of characters ){
+        const card = document.createElement('div');
+        card.classList.add('character-card');
+
+        card.innerHTML = `
+            <img src="${character.image}" />
+            <h2> ${character.name} </h2>
+            <p> Status: ${character.status} </p>
+            <p> Especie: ${character.species} </p>
+        `;
+
+        charactersEl.appendChild(card);
+
+    }
+
 }
 
-function agregarPersonaje(id) {
-  // Guardar el personaje en la lista
-  console.log("Agregar personaje con ID " + id);
-}
+displayCharacters();
 
-function limpiar() {
-  document.getElementById("personaje").value = "";
-  document.getElementById("resultado").innerHTML = "";
-}
+nameFilterEl.addEventListener('input', () => {
+    displayCharacters(nameFilterEl.value, statusFilterEl.value );
+});
+
+statusFilterEl.addEventListener('change', () => {
+    displayCharacters(nameFilterEl.value, statusFilterEl.value );
+});
