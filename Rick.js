@@ -25,10 +25,16 @@ function mostrarResultado(data) {
       <p>Especie: ${personaje.species}</p>
       <p>Estatus: ${personaje.status}</p>
       <p>Origen: ${personaje.origin.name}</p>
+      <button onclick="agregarPersonaje(${personaje.id})">Agregar</button>
     `;
   } else {
     resultado.innerHTML = "No se encontró el personaje";
   }
+}
+
+function agregarPersonaje(id) {
+  // Guardar el personaje en la lista
+  console.log("Agregar personaje con ID " + id);
 }
 
 function limpiar() {
