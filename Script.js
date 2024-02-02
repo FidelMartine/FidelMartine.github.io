@@ -9,10 +9,6 @@ function buscarPersonaje() {
     })
     .then(function(data) {
       mostrarResultado(data);
-    })
-    .catch(function(error) {
-      console.log(error);
-      mostrarError(error);
     });
 }
 
@@ -23,17 +19,19 @@ function mostrarResultado(data) {
   // Mostrar la información del personaje
   if (data.results.length > 0) {
     var personaje = data.results[0];
-    var imagen = document.createElement("img");
-    imagen.src = personaje.image;
-    imagen.onload = function() {
-      // Ajustar el tamaño del resultado a la imagen
-      resultado.style.width = imagen.width + "px";
-      resultado.style.height = imagen.height + "px";
-      resultado.appendChild(imagen);
+    resultado.innerHTML = `
+      <img src="${personaje.image}" alt="${personaje.name}">
+      <h2>${personaje.name}</h2>
+      <p>Especie: ${personaje.species}</p>
+      <p>Estatus: ${personaje.status}</p>
+      <p>Origen: ${personaje.origin.name}</p>
+    `;
+  } else {
+    resultado.innerHTML = "No se encontró el personaje";
+  }
+}
 
-      // Agregar la información del personaje
-      var h2 = document.createElement("h2");
-      h2.textContent = personaje.name;
-      resultado.appendChild(h2);
-
-      var p
+function limpiar() {
+  document.getElementById("personaje").value = "";
+  document.getElementById("resultado").innerHTML = "";
+}
