@@ -8,11 +8,15 @@
 </head>
 <body>
 
-     <h1>API Rick y Morty</h1>
-  <input type="text" id="personaje" placeholder="Ingrese el nombre del personaje">
-  <button onclick="buscarPersonaje()">Buscar</button>
-  <button onclick="limpiar()">Limpiar</button>
-  <div id="resultado"></div>
+    <h1>Buscador</h1>
+
+    <div id="filters">
+        <input type="text" id="name-filter" placeholder="Filtrado por nombre" >
+        <select id="status-filter">
+            <button onclick="buscarPersonaje()">Buscar</button>
+            <button onclick="limpiar()">Limpiar</button>
+            <div id="resultado"></div>
+        </select>
     </div>
 
     <div class="container">
