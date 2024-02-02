@@ -60,3 +60,7 @@ button:hover {
 #resultado .error {
   color: #ff0000;
 }
+#resultado {
+  margin: 0 auto; /* Centrar el elemento */
+  width: 80%; /* Ancho máximo del elemento */
+}
