@@ -2,21 +2,16 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Formulario de inicio de sesión</title>
-  <link rel="stylesheet" href="Style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Rick y Morty</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Iniciar sesión</h1>
-    <form action="/login" method="POST">
-      <input type="text" name="username" placeholder="Usuario">
-      <br>
-      <input type="password" name="password" placeholder="Contraseña">
-      <br>
-      <input type="submit" value="Iniciar sesión">
-    </form>
-  </div>
-<script src="login.js"></script>
+  <h1>API Rick y Morty</h1>
+  <input type="text" id="personaje" placeholder="Ingrese el nombre del personaje">
+  <button onclick="buscarPersonaje()">Buscar</button>
+  <button onclick="limpiar()">Limpiar</button>
+  <div id="resultado"></div>
+  <script src="Rick.js"></script>
 </body>
-
 </html>
