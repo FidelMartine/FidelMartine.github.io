@@ -1,71 +1,65 @@
-import imagenRickMorty from './assets/img/rick-morty.png'
-import { useState,useEffect } from 'react'
-import './App.css'
-import Characters from './components/Characters'
+const charactersEl = document.getElementById('characters');
+const nameFilterEl = document.getElementById('name-filter');
+const statusFilterEl = document.getElementById('status-filter');
 
+// tenemos que crear la funcion que haga el llamado a la api
 
-function App() {
-  const [character, setcharacter] = useState(null)
-  const [pageNumber, setpageNumber] = useState(0);
-  const [buscar,setBuscrar] = useState("");
-  const [info, setinfo] = useState(null);
-  
-  const Url= "https://rickandmortyapi.com/api/character/?page="+pageNumber+"&name="+buscar;
-  
-  
- 
-  
-  useEffect(() => {
-    if(pageNumber==0){
-      return setcharacter(null);
+async function getCharacters (name, status){
+
+    let url = 'https://rickandmortyapi.com/api/character/';
+
+    if (name || status){
+        url += '?';
+        if(name){
+            url += `name=${name}&`;
+        }
+
+        if(status){
+            url += `status=${status}`;
+        }
     }
-    fetch(Url)
-      .then((response) => response.json())
-      .then((data) =>{
-        //si no hay personajes que coincidan con la busqueda se muestra un mensaje que indique que no hay personajes
-        if(data.error){
-          setcharacter(data.error);
-         
-          
-        }else{
-          setcharacter(data.results)
-          setinfo(data.info)
-        }
-      } );
-  }, [Url]);
 
-  
- 
 
-  const reqApi=async() =>{
-   //realizando peticion a la api de rick and morty 
-    const api= await fetch(Url);
-    const charactersApi= await api.json();    
-    setcharacter(charactersApi.results); 
-    setinfo(charactersApi.info);  
-  };
+    const response = await fetch(url);
+    const data = await response.json(); 
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className='title'>Rick & Morty</h1>
-        
-        {
-          character ? ( 
-            <Characters info={info} setBuscrar={setBuscrar} pageNumber={pageNumber} setpageNumber={setpageNumber} characters={character} setCharacters={setcharacter}/>
-          ) : (
-            <>
-            <img src={imagenRickMorty} className="img-home" alt="Rick & Morty"  />  
-            <br/>
-             <button onClick={reqApi} className="btn-search" >Buscar</button>           
-            </>
-           )           
-        }
-          
-      </header>            
-    </div>
-  )
+    return data.results;
+
 }
 
-export default App
+// la funcion que va a renderizar los elementos dentro del DOM
 
+async function displayCharacters (name, status) {
+    
+    // Obtener los personajes filtrados
+    const characters = await getCharacters(name, status);
+    
+    charactersEl.innerHTML = '';
+
+    // renderizar los personajes
+    for( let character of characters ){
+        const card = document.createElement('div');
+        card.classList.add('character-card');
+
+        card.innerHTML = `
+            <img src="${character.image}" />
+            <h2> ${character.name} </h2>
+            <p> Status: ${character.status} </p>
+            <p> Especie: ${character.species} </p>
+        `;
+
+        charactersEl.appendChild(card);
+
+    }
+
+}
+
+displayCharacters();
+
+nameFilterEl.addEventListener('input', () => {
+    displayCharacters(nameFilterEl.value, statusFilterEl.value );
+});
+
+statusFilterEl.addEventListener('change', () => {
+    displayCharacters(nameFilterEl.value, statusFilterEl.value );
+});
