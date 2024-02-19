@@ -33,10 +33,13 @@
             }
         };
 
-        const btnBuscar = document.getElementById("btn-buscar");
-        btnBuscar.addEventListener("click", () => {
-            const nombrePersonaje = document.getElementById("nombre-personaje").value;
+        const inputNombre = document.getElementById("nombre-personaje");
+        inputNombre.addEventListener("keydown", (evento) => {
+          if (evento.keyCode === 13) {
+            // Buscar el personaje
+            const nombrePersonaje = inputNombre.value;
             buscarPersonaje(nombrePersonaje);
+          }
         });
 
         const btnLimpiar = document.getElementById("btn-limpiar");
