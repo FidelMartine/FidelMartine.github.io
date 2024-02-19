@@ -1,48 +1,64 @@
-CSS
 /* Colores */
 body {
-    background-color: #f7f7f7;
+  background-color: #f2f2f2;
+}
+
+h1 {
+  color: #333;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+#nombre-personaje {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 50%;
+  font-size: 16px;
+}
+
+#btn-buscar,
+#btn-limpiar {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#btn-buscar:hover,
+#btn-limpiar:hover {
+  background-color: #444;
 }
 
 #resultados {
-    background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
 }
 
-/* Tarjetas de personajes */
-.tarjeta-personaje {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin: 10px;
-    padding: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+.personaje {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.tarjeta-personaje img {
-    width: 100px;
-    height: auto;
-    margin-bottom: 10px;
+.imagen-personaje {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-right: 20px;
 }
 
-.tarjeta-personaje h2 {
-    font-size: 18px;
-    margin-bottom: 5px;
+.info-personaje {
+  font-size: 16px;
 }
 
-.tarjeta-personaje p {
-    font-size: 16px;
-    margin-bottom: 5px;
+.nombre-personaje {
+  font-weight: bold;
 }
 
-/* Botones */
-#btn-buscar, #btn-limpiar {
-    margin: 10px;
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#btn-buscar:hover, #btn-limpiar:hover {
-    background-color: #ddd;
+.especie,
+.estado {
+  margin-bottom: 5px;
 }
