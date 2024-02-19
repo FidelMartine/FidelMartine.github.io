@@ -1,63 +1,45 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: sans-serif;
   margin: 20px;
-  background-color: #FFFFFF;
 }
 
 h1 {
-  font-size: 2em;
-  margin-top: 0;
-  color: #333;
+  text-align: center;
 }
 
-input {
+#login-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 300px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
   padding: 10px;
-  font-size: 16px;
   border: 1px solid #ccc;
-  width: 500px;
-  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  background-color: #000;
+  background-color: #333;
   color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  margin-right: 10px;
 }
 
 button:hover {
-  background-color: #333;
+  background-color: #444;
 }
 
-#resultado {
-  margin: 0 auto;
-  width: 80%;
-  border: 1px solid #ccc;
-  padding: 20px;
-  background-color: #fafafa;
-  border-radius: 5px;
-}
-
-#resultado img {
-  float: left;
-  margin-right: 20px;
-  border: 1px solid #ddd;
-  padding: 5px;
-}
-
-#resultado h2 {
-  margin-top: 0;
-  color: #000;
-}
-
-#resultado p {
-  margin-bottom: 10px;
-  color: #444;
-}
-
-#resultado .error {
-  color: #ff0000;
+a {
+  color: #333;
+  text-decoration: none;
 }
