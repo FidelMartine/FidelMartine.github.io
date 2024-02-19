@@ -1,4 +1,4 @@
- <script>
+
         const API_URL = "https://rickandmortyapi.com/api/character/";
 
         const buscarPersonaje = (nombre) => {
@@ -44,4 +44,4 @@
             document.getElementById("nombre-personaje").value = "";
             document.getElementById("resultados").innerHTML = "";
         });
-    </script>
+
